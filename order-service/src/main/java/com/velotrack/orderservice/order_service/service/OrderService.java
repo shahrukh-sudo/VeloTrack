@@ -2,6 +2,7 @@ package com.velotrack.orderservice.order_service.service;
 
 import com.velotrack.orderservice.order_service.dao.OrderDao;
 import com.velotrack.orderservice.order_service.dto.Order;
+import com.velotrack.orderservice.order_service.kafka.service.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,13 @@ public class OrderService {
   @Autowired
   private OrderDao orderDao;
 
+  @Autowired
+  private KafkaProducerService producerService;
+
   // Create a new order
   public void createOrder(Order order) {
-    orderDao.saveOrder(order);
+    Integer no  = orderDao.saveOrder(order);
+    producerService.sendMessage("veloTrack","message for order_id: "+no);
   }
 
   // Get an order by ID

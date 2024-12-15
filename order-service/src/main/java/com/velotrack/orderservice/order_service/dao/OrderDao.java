@@ -19,8 +19,8 @@ public class OrderDao {
 
   // SQL queries
   private static final String INSERT_ORDER = """
-            INSERT INTO orders (product_id, quantity, status, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO orders (customer_id, order_date, status, total_amount, shipping_address, billing_address, payment_status)
+            VALUES (?, ?, ?, ?, ?,?,?)
             """;
 
   private static final String SELECT_ORDER_BY_ID = """
@@ -42,11 +42,13 @@ public class OrderDao {
   // Save a new order
   public int saveOrder(Order order) {
     return jdbcTemplate.update(INSERT_ORDER,
-        order.getProductId(),
-        order.getQuantity(),
+        order.getCustomerId(),
+        order.getOrderDate(),
         order.getStatus(),
-        order.getCreatedAt(),
-        order.getUpdatedAt());
+        order.getTotalAmount(),
+        order.getShippingAddress(),
+        order.getBillingAddress(),
+        order.getPaymentStatus());
   }
 
   // Find order by ID
@@ -75,7 +77,7 @@ public class OrderDao {
     public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
       Order order = new Order();
       order.setOrderId(rs.getLong("order_id"));
-      order.setProductId(rs.getLong("product_id"));
+      //order.setProductId(rs.getLong("product_id"));
       order.setQuantity(rs.getInt("quantity"));
       order.setStatus(rs.getString("status"));
       order.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());

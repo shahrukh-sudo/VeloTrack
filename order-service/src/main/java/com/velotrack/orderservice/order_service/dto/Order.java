@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
 
 @Data
 @AllArgsConstructor
@@ -11,11 +12,18 @@ import lombok.NoArgsConstructor;
 public class Order {
 
   private Long orderId;
-  private Long productId;
   private int quantity;
   private String status;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
+  private Long customerId;
+  private LocalDateTime orderDate;
+  private double totalAmount;
+  private String shippingAddress;
+  private String billingAddress;
+  private String paymentStatus;
+
+  // Getters and Setters
   public Long getOrderId() {
     return orderId;
   }
@@ -24,16 +32,6 @@ public class Order {
     this.orderId = orderId;
   }
 
-  // Getter and Setter for productId
-  public Long getProductId() {
-    return productId;
-  }
-
-  public void setProductId(Long productId) {
-    this.productId = productId;
-  }
-
-  // Getter and Setter for quantity
   public int getQuantity() {
     return quantity;
   }
@@ -42,7 +40,6 @@ public class Order {
     this.quantity = quantity;
   }
 
-  // Getter and Setter for status
   public String getStatus() {
     return status;
   }
@@ -51,7 +48,6 @@ public class Order {
     this.status = status;
   }
 
-  // Getter and Setter for createdAt
   public LocalDateTime getCreatedAt() {
     return createdAt;
   }
@@ -60,7 +56,6 @@ public class Order {
     this.createdAt = createdAt;
   }
 
-  // Getter and Setter for updatedAt
   public LocalDateTime getUpdatedAt() {
     return updatedAt;
   }
@@ -69,5 +64,52 @@ public class Order {
     this.updatedAt = updatedAt;
   }
 
+  public Long getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(Long customerId) {
+    this.customerId = customerId;
+  }
+
+  public LocalDateTime getOrderDate() {
+    return orderDate;
+  }
+
+  public void setOrderDate(LocalDateTime orderDate) {
+    this.orderDate = orderDate;
+  }
+
+  public double getTotalAmount() {
+    return totalAmount;
+  }
+
+  public void setTotalAmount(double totalAmount) {
+    this.totalAmount = totalAmount;
+  }
+
+  public String getShippingAddress() {
+    return shippingAddress;
+  }
+
+  public void setShippingAddress(String shippingAddress) {
+    this.shippingAddress = shippingAddress;
+  }
+
+  public String getBillingAddress() {
+    return billingAddress;
+  }
+
+  public void setBillingAddress(String billingAddress) {
+    this.billingAddress = billingAddress;
+  }
+
+  public String getPaymentStatus() {
+    return paymentStatus;
+  }
+
+  public void setPaymentStatus(String paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
 }
 

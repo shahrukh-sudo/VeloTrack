@@ -1,0 +1,30 @@
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+  kafka_manager:
+    image: kafkamanager/kafka-manager
+    container_name: kafka-manager
+    restart: always
+    ports:
+      - "9000:9000"
+    depends_on:
+      - zookeeper
+      - kafka
+    environment:
+      ZK_HOSTS: "zookeeper:2181"  # Make sure this uses the container name, not localhost
+      APPLICATION_SECRET: "random-secret"

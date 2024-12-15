@@ -20,7 +20,7 @@ public class OrderService {
   // Create a new order
   public void createOrder(Order order) {
     Integer no  = orderDao.saveOrder(order);
-    producerService.sendMessage("veloTrack","message for order_id: "+no);
+    producerService.sendMessage("veloTrackTest","message for order_id: "+no);
   }
 
   // Get an order by ID
